@@ -75,7 +75,7 @@ public class SkuServiceImpl implements SkuService {
     }
 
 
-    public PmsSkuInfo getSkuByIdFromDb(String skuId){
+    public PmsSkuInfo getSkuByIdFromDb(String skuId) {
         // sku商品对象
         PmsSkuInfo pmsSkuInfo = new PmsSkuInfo();
         pmsSkuInfo.setId(skuId);
@@ -90,13 +90,13 @@ public class SkuServiceImpl implements SkuService {
     }
 
     @Override
-    public PmsSkuInfo getSkuById(String skuId,String ip) {
-        System.out.println("ip为"+ip+"的同学:"+Thread.currentThread().getName()+"进入的商品详情的请求");
+    public PmsSkuInfo getSkuById(String skuId, String ip) {
+        System.out.println("ip为" + ip + "的同学:" + Thread.currentThread().getName() + "进入的商品详情的请求");
         PmsSkuInfo pmsSkuInfo = new PmsSkuInfo();
         // 链接缓存
 //        Jedis jedis = redisUtil.getJedis();
         // 查询缓存
-        String skuKey = "sku:"+skuId+":info";
+        String skuKey = "sku:" + skuId + ":info";
 //        String skuJson = jedis.get(skuKey);
 
 //        if(StringUtils.isNotBlank(skuJson)){//if(skuJson!=null&&!skuJson.equals(""))
@@ -107,14 +107,14 @@ public class SkuServiceImpl implements SkuService {
 //            // 如果缓存中没有，查询mysql
 //            System.out.println("ip为"+ip+"的同学:"+Thread.currentThread().getName()+"发现缓存中没有，申请缓存的分布式锁："+"sku:" + skuId + ":lock");
 
-            // 设置分布式锁
+        // 设置分布式锁
 //            String token = UUID.randomUUID().toString();
 ////            String OK = jedis.set("sku:" + skuId + ":lock", token, "nx", "px", 10*1000);// 拿到锁的线程有10秒的过期时间
 ////            if(StringUtils.isNotBlank(OK)&&OK.equals("OK")){
 //                // 设置成功，有权在10秒的过期时间内访问数据库
 //                System.out.println("ip为"+ip+"的同学:"+Thread.currentThread().getName()+"有权在10秒的过期时间内访问数据库："+"sku:" + skuId + ":lock");
 //
-                pmsSkuInfo =  getSkuByIdFromDb(skuId);
+        pmsSkuInfo = getSkuByIdFromDb(skuId);
 //
 //                if(pmsSkuInfo!=null){
 //                    // mysql查询结果存入redis
@@ -178,7 +178,7 @@ public class SkuServiceImpl implements SkuService {
 
         BigDecimal price = pmsSkuInfo1.getPrice();
 
-        if(price.compareTo(productPrice)==0){
+        if (price.compareTo(productPrice) == 0) {
             b = true;
         }
 

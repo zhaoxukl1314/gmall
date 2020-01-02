@@ -1,10 +1,13 @@
 package com.zhaoxu.searchservice;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.zhaoxu.bean.PmsSearchSkuInfo;
 import com.zhaoxu.bean.PmsSkuInfo;
 import com.zhaoxu.service.SkuService;
 import io.searchbox.client.JestClient;
+import io.searchbox.core.Index;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -42,6 +45,12 @@ class SearchServiceApplicationTests {
             pmsSearchSkuInfos.add(pmsSearchSkuInfo);
 
         }
+
+        for (PmsSearchSkuInfo pmsSearchSkuInfo : pmsSearchSkuInfos) {
+            Index build = new Index.Builder(pmsSearchSkuInfo).index("gmall0105").type("PmsSkuInfo").id(pmsSearchSkuInfo.getId() + "").build();
+            jestClient.execute(build);
+        }
+
     }
 
 }
