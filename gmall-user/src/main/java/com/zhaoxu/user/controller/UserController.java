@@ -1,8 +1,8 @@
 package com.zhaoxu.user.controller;
 
-import com.zhaoxu.user.bean.UmsMember;
-import com.zhaoxu.user.bean.UmsMemberReceiveAddress;
-import com.zhaoxu.user.service.UserService;
+import com.zhaoxu.bean.UmsMember;
+import com.zhaoxu.bean.UmsMemberReceiveAddress;
+import com.zhaoxu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/addresses")
-    public UmsMemberReceiveAddress getReceiveAddressByMemberId(@RequestParam("member_id") String memberId) {
-        UmsMemberReceiveAddress umsMemberReceiveAddress = userService.getReceiveAddressByMemberId(memberId);
+    public List<UmsMemberReceiveAddress> getReceiveAddressByMemberId(@RequestParam("member_id") String memberId) {
+        List<UmsMemberReceiveAddress> umsMemberReceiveAddress = userService.getReceiveAddressByMemberId(memberId);
         return umsMemberReceiveAddress;
     }
 

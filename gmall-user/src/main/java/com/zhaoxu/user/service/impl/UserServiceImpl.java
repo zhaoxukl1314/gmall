@@ -1,10 +1,10 @@
 package com.zhaoxu.user.service.impl;
 
-import com.zhaoxu.user.bean.UmsMember;
-import com.zhaoxu.user.bean.UmsMemberReceiveAddress;
+import com.zhaoxu.bean.UmsMember;
+import com.zhaoxu.bean.UmsMemberReceiveAddress;
+import com.zhaoxu.service.UserService;
 import com.zhaoxu.user.mapper.UmsMemberReceiveAddressMapper;
 import com.zhaoxu.user.mapper.UserMapper;
-import com.zhaoxu.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -28,10 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UmsMemberReceiveAddress getReceiveAddressByMemberId(String memberId) {
+    public List<UmsMemberReceiveAddress> getReceiveAddressByMemberId(String memberId) {
         Example e = new Example(UmsMemberReceiveAddress.class);
         e.createCriteria().andEqualTo("memberId",memberId);
-        umsMemberReceiveAddressMapper.selectByExample(e);
+        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = umsMemberReceiveAddressMapper.selectByExample(e);
+        return umsMemberReceiveAddresses;
     }
 
 }
