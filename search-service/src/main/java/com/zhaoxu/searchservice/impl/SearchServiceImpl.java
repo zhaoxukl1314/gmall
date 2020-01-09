@@ -12,6 +12,8 @@ import org.apache.http.util.TextUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -94,6 +96,9 @@ public class SearchServiceImpl implements SearchService {
         highlightBuilder.field("skuName");
         highlightBuilder.postTags("</span>");
         searchSourceBuilder.highlighter(highlightBuilder);
+
+        TermsAggregationBuilder groupby_attr = AggregationBuilders.terms("groupby_attr").field("skuAttrValueList.valueId");
+        searchSourceBuilder.aggregation(groupby_attr);
 
         searchSourceBuilder.sort("id", SortOrder.DESC);
         String searchDSL = searchSourceBuilder.toString();
