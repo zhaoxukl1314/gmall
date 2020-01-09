@@ -81,4 +81,12 @@ public class AttrServiceImpl implements AttrService {
     public List<PmsBaseSaleAttr> getPmsBaseSaleAttr() {
         return pmsBaseSaleMapper.selectAll();
     }
+
+    @Override
+    public List<PmsBaseAttrInfo> getAttrValueListByValueId(Set<String> valueIdSet) {
+
+        String valueIdStr = StringUtils.join(valueIdSet, ",");//41,45,46
+        List<PmsBaseAttrInfo> pmsBaseAttrInfos = pmsAttrInfoMapper.selectAttrValueListByValueId(valueIdStr);
+        return pmsBaseAttrInfos;
+    }
 }

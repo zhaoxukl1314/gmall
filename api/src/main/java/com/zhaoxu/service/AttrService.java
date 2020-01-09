@@ -15,4 +15,6 @@ public interface AttrService {
 
     List<PmsBaseSaleAttr> getPmsBaseSaleAttr();
 
+    List<PmsBaseAttrInfo> getAttrValueListByValueId(Set<String> valueIdSet);
+
 }

@@ -4,5 +4,5 @@ import com.zhaoxu.bean.PmsBaseAttrInfo;
 import tk.mybatis.mapper.common.Mapper;
 
 public interface PmsAttrInfoMapper extends Mapper<PmsBaseAttrInfo> {
-
+    List<PmsBaseAttrInfo> selectAttrValueListByValueId(@Param("valueIdStr") String valueIdStr);
 }
