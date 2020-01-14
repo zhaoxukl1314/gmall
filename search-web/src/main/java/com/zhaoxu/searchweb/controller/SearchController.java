@@ -1,14 +1,15 @@
 package com.zhaoxu.searchweb.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.zhaoxu.bean.PmsSearchParam;
-import com.zhaoxu.bean.PmsSearchSkuInfo;
+import com.zhaoxu.bean.*;
+import com.zhaoxu.service.AttrService;
 import com.zhaoxu.service.SearchService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class SearchController {

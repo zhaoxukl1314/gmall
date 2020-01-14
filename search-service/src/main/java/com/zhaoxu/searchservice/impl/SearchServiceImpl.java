@@ -97,8 +97,8 @@ public class SearchServiceImpl implements SearchService {
         highlightBuilder.postTags("</span>");
         searchSourceBuilder.highlighter(highlightBuilder);
 
-        TermsAggregationBuilder groupby_attr = AggregationBuilders.terms("groupby_attr").field("skuAttrValueList.valueId");
-        searchSourceBuilder.aggregation(groupby_attr);
+//        TermsAggregationBuilder groupby_attr = AggregationBuilders.terms("groupby_attr").field("skuAttrValueList.valueId");
+//        searchSourceBuilder.aggregation(groupby_attr);
 
         searchSourceBuilder.sort("id", SortOrder.DESC);
         String searchDSL = searchSourceBuilder.toString();
