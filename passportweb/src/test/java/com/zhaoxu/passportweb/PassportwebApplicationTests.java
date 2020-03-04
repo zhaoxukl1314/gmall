@@ -1,10 +1,10 @@
-package com.zhaoxu.user;
+package com.zhaoxu.passportweb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserWebApplicationTests {
+class PassportwebApplicationTests {
 
     @Test
     void contextLoads() {
