@@ -74,4 +74,13 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public void addUserToken(String token, String memberId) {
+        Jedis jedis = redisUtil.getJedis();
+
+        jedis.setex("user:"+memberId+":token",60*60*2,token);
+
+        jedis.close();
+    }
+
 }

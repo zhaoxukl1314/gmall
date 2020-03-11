@@ -23,16 +23,42 @@ public class PassportController {
     @RequestMapping(value = "login")
     @ResponseBody
     public String login(UmsMember umsMember) {
+        String token = "";
 
-        UmsMember member = userService.login(umsMember);
+        // 调用用户服务验证用户名和密码
+        UmsMember umsMemberLogin = userService.login(umsMember);
 
-        if (member != null) {
+        if(umsMemberLogin!=null){
+            // 登录成功
 
-        } else {
+            // 用jwt制作token
+            String memberId = umsMemberLogin.getId();
+            String nickname = umsMemberLogin.getNickname();
+            Map<String,Object> userMap = new HashMap<>();
+            userMap.put("memberId",memberId);
+            userMap.put("nickname",nickname);
 
+
+            String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
+            if(StringUtils.isBlank(ip)){
+                ip = request.getRemoteAddr();// 从request中获取ip
+                if(StringUtils.isBlank(ip)){
+                    ip = "127.0.0.1";
+                }
+            }
+
+            // 按照设计的算法对参数进行加密后，生成token
+            token = JwtUtil.encode("2019gmall0105", userMap, ip);
+
+            // 将token存入redis一份
+            userService.addUserToken(token,memberId);
+
+        }else{
+            // 登录失败
+            token = "fail";
         }
 
-        return "token";
+        return token;
     }
 
 
