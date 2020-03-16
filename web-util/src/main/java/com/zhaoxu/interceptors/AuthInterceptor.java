@@ -36,14 +36,24 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         boolean loginSuccess = methodAnnotation.loginSuccess();
 
         String success = "fail";
+        Map<String,String> successMap = new HashMap<>();
         if (StringUtils.isNotBlank(token)) {
-            success = HttpclientUtil.doGet("http://localhost:8085/verify?token=" + token);
+            String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
+            if(StringUtils.isBlank(ip)){
+                ip = request.getRemoteAddr();// 从request中获取ip
+                if(StringUtils.isBlank(ip)){
+                    ip = "127.0.0.1";
+                }
+            }
+            String successJson  = HttpclientUtil.doGet("http://localhost:8085/verify?token=" + token+"&currentIp="+ip);
+            successMap = JSON.parseObject(successJson,Map.class);
+            success = successMap.get("status");
         }
 
         if (loginSuccess) {
             if (success.equalsIgnoreCase("success")) {
-                request.setAttribute("memberId", "1");
-                request.setAttribute("nickname", "nickname");
+                request.setAttribute("memberId", successMap.get("memberId"));
+                request.setAttribute("nickname", successMap.get("nickname"));
                 return true;
             } else {
                 StringBuffer requestURL = request.getRequestURL();
@@ -53,8 +63,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         } else {
 
             if (!success.equalsIgnoreCase("success")) {
-                request.setAttribute("memberId", "1");
-                request.setAttribute("nickname", "nickname");
+                request.setAttribute("memberId", successMap.get("memberId"));
+                request.setAttribute("nickname", successMap.get("nickname"));
             } else {
 
             }
