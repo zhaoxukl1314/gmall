@@ -1,17 +1,24 @@
 package com.zhaoxu.passportweb.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.zhaoxu.bean.UmsMember;
 import com.zhaoxu.service.UserService;
+import com.zhaoxu.util.JwtUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class PassportController {
 
-    @Autowired
+    @Reference
     UserService userService;
 
     @RequestMapping(value = "verify")
@@ -22,7 +29,7 @@ public class PassportController {
 
     @RequestMapping(value = "login")
     @ResponseBody
-    public String login(UmsMember umsMember) {
+    public String login(UmsMember umsMember, HttpServletRequest request) {
         String token = "";
 
         // 调用用户服务验证用户名和密码

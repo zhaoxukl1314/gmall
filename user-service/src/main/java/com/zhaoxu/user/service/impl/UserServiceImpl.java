@@ -9,7 +9,6 @@ import com.zhaoxu.user.mapper.UmsMemberReceiveAddressMapper;
 import com.zhaoxu.user.mapper.UserMapper;
 import com.zhaoxu.util.RedisUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import tk.mybatis.mapper.entity.Example;

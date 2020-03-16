@@ -1,4 +1,4 @@
-package com.zhaoxu.user;
+package com.zhaoxu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
