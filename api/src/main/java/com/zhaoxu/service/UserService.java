@@ -14,4 +14,12 @@ public interface UserService {
     UmsMember login(UmsMember umsMember);
 
     void addUserToken(String token, String memberId);
+
+    UmsMember addOauthUser(UmsMember umsMember);
+
+    UmsMember checkOauthUser(UmsMember umsCheck);
+
+    UmsMember getOauthUser(UmsMember umsMemberCheck);
+
+    UmsMemberReceiveAddress getReceiveAddressById(String receiveAddressId);
 }
