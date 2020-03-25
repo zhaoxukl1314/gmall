@@ -1,5 +1,6 @@
 package com.zhaoxu.interceptors;
 
+import com.alibaba.fastjson.JSON;
 import com.zhaoxu.annotations.LoginRequired;
 import com.zhaoxu.util.CookieUtil;
 import com.zhaoxu.util.HttpclientUtil;
@@ -10,6 +11,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Component
