@@ -67,13 +67,13 @@ public class CartController {
         String memberId = (String)request.getAttribute("memberId");
         String nickname = (String)request.getAttribute("nickname");
 
-        if (StringUtils.isBlank(userid)) {
+        if (StringUtils.isBlank(memberId)) {
             String cartListCookie = CookieUtil.getCookieValue(request, "cartListCookie", true);
             if (StringUtils.isNotBlank(cartListCookie)) {
                 omsCartItems = JSON.parseArray(cartListCookie, OmsCartItem.class);
             }
         } else {
-            omsCartItems = cartService.cartList(userid);
+            omsCartItems = cartService.cartList(memberId);
         }
 
         for (OmsCartItem omsCartItem : omsCartItems) {
