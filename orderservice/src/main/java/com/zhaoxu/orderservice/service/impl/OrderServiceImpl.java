@@ -11,15 +11,12 @@ import com.zhaoxu.orderservice.mapper.OmsOrderMapper;
 import com.zhaoxu.service.CartService;
 import com.zhaoxu.service.OrderService;
 import com.zhaoxu.util.RedisUtil;
-import org.apache.activemq.command.ActiveMQMapMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.jms.*;
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
